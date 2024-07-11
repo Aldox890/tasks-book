@@ -1,5 +1,4 @@
 import os
-from os import environ
 from datetime import datetime
 
 from app.data_models import Task
