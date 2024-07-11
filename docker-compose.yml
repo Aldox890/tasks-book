@@ -1,0 +1,20 @@
+version: '3.1'
+
+services:
+
+  mongo:
+    hostname: mongo
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: test_usr
+      MONGO_INITDB_ROOT_PASSWORD: test_pwd
+
+  tasks_book:
+    build: .
+    depends_on:
+      - mongo
+    environment:
+      MONGO_URI: mongodb://test_usr:test_pwd@mongo:27017/
