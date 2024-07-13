@@ -1,0 +1,26 @@
+name: test-ci
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mongodb:
+        image: mongo
+        env:
+          MONGO_INITDB_ROOT_USERNAME: test_usr
+          MONGO_INITDB_ROOT_PASSWORD: test_pwd
+        ports:
+          - 27017:27017
+    steps:
+      - uses: actions/checkout@v4
+      
+      # install requirements
+      - name: install requirements
+        run: pip install -r requirements.txt
+
+      # Run tests
+      - name: run tests
+        run: MONGO_TEST_URI='mongodb://test_usr:test_pwd@localhost:27017/' MONGO_TEST_DB='task_db_test' pytest
