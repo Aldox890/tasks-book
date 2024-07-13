@@ -7,8 +7,8 @@ from app.data_models import Task
 class TaskStorage:
 
     def __init__(self, mongo_uri, database_name):
-        client = MongoClient(mongo_uri)
-        db = client[database_name]
+        self.client = MongoClient(mongo_uri)
+        db = self.client[database_name]
         self.collection = db['task']
         self.collection.create_index(['task_description'], unique=True)
 
@@ -41,3 +41,6 @@ class TaskStorage:
         if task_data:
             return [Task(**task) for task in task_data]
         return None
+
+    def close_storage(self):
+        self.client.close()
