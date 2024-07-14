@@ -30,7 +30,8 @@ and set MONGO_URI env variable:
 
 > MONGO_URI='mongodb://test_usr:test_pwd@localhost:27017/' python3 -m app --add-task "make-a-pumpkin" --due-date "2024-12-31"
 ## Testing
-Unit testing using pytest is implemented to test all functionalities. 
+Unit testing using pytest is implemented to test all functionalities. The database is cleared and re-populated after
+each unit test
 it is required to either have the docker-compose mongo db running or set environment variables for 
 MONGO_TEST_URI and MONGO_TEST_DB
 
@@ -38,7 +39,8 @@ Example:
 > MONGO_TEST_URI='mongodb://test_usr:test_pwd@localhost:27017/' MONGO_TEST_DB='task_db_test' pytest
 
 ## Actions
-A simple github action is implemented to run unit tests on each push
+A simple github action is implemented to run unit tests on each push, 
+it features a mongo service container and runs a pytest command inside the project directory
 
 ## Assumptions
 - task descriptions cannot have duplicate names

@@ -70,7 +70,7 @@ class TaskBook:
             print("Stored tasks: ")
             for task in self.storage.get_all_tasks():
                 print(f"Task: {task.task_description} - "
-                      f"Due date: {task.due_date} - "
+                      f"Due date: {task.due_date.date()} - "
                       f"Completed: {task.is_completed}")
 
         return result
