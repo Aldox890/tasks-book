@@ -21,6 +21,7 @@ class TaskStorage:
 
     def delete_task(self, task_description: str):
         result = self.collection.delete_one({'task_description': task_description})
+
         return result.deleted_count > 0
 
     def set_task_completed(self, task_description: str):

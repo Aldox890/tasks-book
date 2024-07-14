@@ -16,5 +16,7 @@ services:
     build: .
     depends_on:
       - mongo
+    volumes:
+      - /var/log/tasksapp/logs:/code/logs
     environment:
       MONGO_URI: mongodb://test_usr:test_pwd@mongo:27017/
