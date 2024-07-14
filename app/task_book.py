@@ -43,6 +43,13 @@ class TaskBook:
         """ Add a task new task to the tasks book with its deadline """
         try:
             format_datetime = datetime.strptime(due_date, '%Y-%m-%d')
+            present = datetime.now()
+
+            # Check that due date is before current date
+            if format_datetime.date() < present.date():
+                print("Due date cannot be prior today's date")
+                return None
+
             new_task = Task(task_description=task_description, due_date=format_datetime)
             result = self.storage.create_task(new_task)
 
@@ -62,7 +69,9 @@ class TaskBook:
             # Print all tasks
             print("Stored tasks: ")
             for task in self.storage.get_all_tasks():
-                print(f"{task.task_description} - {task.due_date} - {task.is_completed}")
+                print(f"Task: {task.task_description} - "
+                      f"Due date: {task.due_date} - "
+                      f"Completed: {task.is_completed}")
 
         return result
 
@@ -99,7 +108,8 @@ def setup_loger():
     if not os.path.exists("./logs"):
         os.makedirs("./logs")
 
-    logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', filename='./logs/task_book.log',
+    logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
+                        filename='./logs/task_book.log',
                         level=logging.INFO)
 
     return logger
