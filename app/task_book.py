@@ -1,16 +1,16 @@
 """
-    Main script for the module, implements the user interface for the app
+Main script for the module, implements the user interface for the app
 
-    Classes
-    ---------
-    TasksBook(mongo_uri, task_db): implements all functions the user requires to interact with the tasks book
-    ---------
+Classes
+---------
+TasksBook(mongo_uri, task_db): implements all functions the user requires to interact with the tasks book
+---------
 
-    Functions
-    ---------
-    parse_task(): main entrypoint for the app, parses and interprets the user input
-    setup_logger(): returns configured logger file
-    ---------
+Functions
+---------
+parse_task(): main entrypoint for the app, parses and interprets the user input
+setup_logger(): returns configured logger file
+---------
 
 """
 import argparse
