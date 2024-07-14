@@ -1,3 +1,18 @@
+"""
+    Main script for the module, implements the user interface for the app
+
+    Classes
+    ---------
+    TasksBook(mongo_uri, task_db): implements all functions the user requires to interact with the tasks book
+    ---------
+
+    Functions
+    ---------
+    parse_task(): main entrypoint for the app, parses and interprets the user input
+    setup_logger(): returns configured logger file
+    ---------
+
+"""
 import argparse
 import os
 import logging
@@ -9,7 +24,18 @@ from app.task_storage import TaskStorage
 
 
 class TaskBook:
+    """
+    Class used as user interface for the tasks book
 
+    Methods
+    ---------
+    add_task(task_description, due_date): add a new task to the book, task description must be unique
+    list_tasks(): list all available tasks
+    complete_task(): mark task_description as completed
+    delete_task(): delete task_description from book
+    close_book(): terminates database connection
+    ---------
+    """
     def __init__(self, mongo_uri, task_db):
         self.storage = TaskStorage(mongo_uri, task_db)
 
@@ -26,7 +52,7 @@ class TaskBook:
             return None
         return result
 
-    def list_tasks(self):  # TODO
+    def list_tasks(self):
         """ List all available tasks with their deadline and status"""
         result = self.storage.get_all_tasks()
 
@@ -40,7 +66,7 @@ class TaskBook:
 
         return result
 
-    def complete_task(self, task_description):  # TODO
+    def complete_task(self, task_description):
         """ Mark a task as completed """
         result = self.storage.set_task_completed(task_description)
 
@@ -50,7 +76,7 @@ class TaskBook:
             print(f"Task {task_description} updated successfully")
         return result
 
-    def delete_task(self, task_description):  # TODO
+    def delete_task(self, task_description):
         """ Removes a task from the book """
         result = self.storage.delete_task(task_description)
 
@@ -62,10 +88,12 @@ class TaskBook:
         return result
 
     def close_book(self):
+        """ Close database connection """
         self.storage.close_storage()
 
 
 def setup_loger():
+    """ Setup logging configuration """
     logger = logging.getLogger(__name__)
 
     if not os.path.exists("./logs"):

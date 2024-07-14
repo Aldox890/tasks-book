@@ -41,12 +41,12 @@ def test_create_task(populated_storage):
     """ Entry must be created and unique to pass the test """
 
     # Entry can be added
-    result = populated_storage.add_task("make-a-pumpkin", "2024-10-30")
+    result = populated_storage.add_task("make-a-pumpkin", "2024-10-31")
     if result is None:
         assert False
 
     # Entry cannot must not be duplicated
-    result = populated_storage.add_task("make-a-pumpkin", "2024-10-30")
+    result = populated_storage.add_task("make-a-pumpkin", "2024-10-31")
     assert result is None
 
 

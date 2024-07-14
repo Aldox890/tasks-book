@@ -8,6 +8,8 @@ services:
     restart: always
     ports:
       - "27017:27017"
+    volumes:
+      - mongo_persistent:/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: test_usr
       MONGO_INITDB_ROOT_PASSWORD: test_pwd
@@ -20,3 +22,7 @@ services:
       - /var/log/tasksapp/logs:/code/logs
     environment:
       MONGO_URI: mongodb://test_usr:test_pwd@mongo:27017/
+
+volumes:
+  mongo_persistent:
+    driver: local
