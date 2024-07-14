@@ -26,6 +26,10 @@ The app is ready to work without further configuration. you can still edit some 
 #### Delete a task
 > docker compose run tasks_book --delete-task make-a-snowman
 
+You can also run the app as a module (without docker), makes sure to first install the requirements 
+and set MONGO_URI env variable:
+
+> MONGO_URI='mongodb://test_usr:test_pwd@localhost:27017/' python3 -m app --add-task "make-a-pumpkin" --due-date "2024-12-31"
 ## Testing
 Unit testing using pytest is implemented to test all functionalities. 
 it is required to either have the docker-compose mongo db running or set environment variables for 
