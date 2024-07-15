@@ -28,7 +28,7 @@ The app is ready to work without further configuration. you can still edit some 
 You can also run the app as a module (without docker), makes sure to first install the requirements 
 and set MONGO_URI env variable:
 
-> MONGO_URI='mongodb://test_usr:test_pwd@localhost:27017/' python3 -m app --add-task "make-a-pumpkin" --due-date "2024-12-31"
+> MONGO_URI='mongodb://test_usr:test_pwd@localhost:27017/' python3 -m app --add-task "make-a-pumpkin" --due-date "2024-10-31"
 ## Testing
 Unit testing using pytest is implemented to test all functionalities. The database is cleared and re-populated after
 each unit test
