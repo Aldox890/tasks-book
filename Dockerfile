@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-Workdir /code
+WORKDIR /code
 RUN mkdir ./logs && touch ./logs/task_book.log
 COPY . .
 RUN pip install -r requirements.txt

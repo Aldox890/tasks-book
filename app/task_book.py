@@ -68,7 +68,7 @@ class TaskBook:
         else:
             # Print all tasks
             print("Stored tasks: ")
-            for task in self.storage.get_all_tasks():
+            for task in result:
                 print(f"Task: {task.task_description} - "
                       f"Due date: {task.due_date.date()} - "
                       f"Completed: {task.is_completed}")
@@ -101,7 +101,7 @@ class TaskBook:
         self.storage.close_storage()
 
 
-def setup_loger():
+def setup_logger():
     """ Setup logging configuration """
     logger = logging.getLogger(__name__)
 
@@ -117,7 +117,7 @@ def setup_loger():
 
 def parse_task():
     """ Parse arguments and call book functions """
-    logger = setup_loger()
+    logger = setup_logger()
     parser = argparse.ArgumentParser(description="Tasks Book - helps you keep your deadlines!")
 
     parser.add_argument("-a", "--add-task", metavar="[task description]", help="Add a new task, due date is required")
@@ -146,7 +146,8 @@ def parse_task():
         else:
             print("Error: Invalid command. Use --help for usage information.")
     except Exception as e:
-        # Log any unexpected error that might happen
+        # Log and print any unexpected error that might happen
+        print("Error: " + str(e))
         logger.error(e)
         return False
 
