@@ -36,10 +36,19 @@ class TaskBook:
     close_book(): terminates database connection
     ---------
     """
-    def __init__(self, mongo_uri, task_db):
+    def __init__(self, mongo_uri: str, task_db: str):
+        """
+        initialize tasks book
+
+        Parameters
+        --------
+        mongo_uri: str - complete mongodb connection uri
+        task_db: str - database name
+        --------
+        """
         self.storage = TaskStorage(mongo_uri, task_db)
 
-    def add_task(self, task_description, due_date):
+    def add_task(self, task_description: str, due_date: str):
         """ Add a task new task to the tasks book with its deadline """
         try:
             format_datetime = datetime.strptime(due_date, '%Y-%m-%d')
@@ -75,7 +84,7 @@ class TaskBook:
 
         return result
 
-    def complete_task(self, task_description):
+    def complete_task(self, task_description: str):
         """ Mark a task as completed """
         result = self.storage.set_task_completed(task_description)
 
@@ -85,7 +94,7 @@ class TaskBook:
             print(f"Task {task_description} updated successfully")
         return result
 
-    def delete_task(self, task_description):
+    def delete_task(self, task_description: str):
         """ Removes a task from the book """
         result = self.storage.delete_task(task_description)
 

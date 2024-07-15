@@ -17,7 +17,16 @@ class TaskStorage:
     close_storage(): closes db connection
     ---------
     """
-    def __init__(self, mongo_uri, database_name):
+    def __init__(self, mongo_uri: str, database_name: str):
+        """
+        initialize database connection
+
+        Parameters
+        --------
+        mongo_uri: str - complete mongodb connection uri
+        database_name: str - database name
+        --------
+        """
         self.client = MongoClient(mongo_uri)
         db = self.client[database_name]
         self.collection = db['task']
